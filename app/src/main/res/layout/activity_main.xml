@@ -1,14 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
-  xmlns:android="http://schemas.android.com/apk/res/android">
-  <LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
+  <data>
+    <variable
+      name="user"
+      type="com.ducdungdam.dartfriends.model.User"/>
+  </data>
+  <android.support.v4.widget.DrawerLayout
+    android:id="@+id/navigation_drawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-    <TextView
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="MainActivity"/>
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 
-  </LinearLayout>
+    <android.support.design.widget.CoordinatorLayout
+      android:id="@+id/coordinator_layout"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+      <include
+        android:id="@+id/appbar"
+        layout="@layout/activity_main_appbar"/>
+
+      <include
+        android:id="@+id/content"
+        layout="@layout/activity_main_content"/>
+    </android.support.design.widget.CoordinatorLayout>
+
+    <com.ducdungdam.dartfriends.widget.NavigationView.NavigationView
+      android:id="@+id/navigation_view"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_gravity="start"
+      android:background="@color/colorPrimaryDark"
+      android:fitsSystemWindows="true"
+      app:user="@{user}"/>
+  </android.support.v4.widget.DrawerLayout>
 </layout>

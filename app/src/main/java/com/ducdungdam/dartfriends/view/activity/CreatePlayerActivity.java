@@ -1,4 +1,4 @@
-package com.ducdungdam.dartfriends.view;
+package com.ducdungdam.dartfriends.view.activity;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;

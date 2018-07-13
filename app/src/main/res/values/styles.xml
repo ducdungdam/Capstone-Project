@@ -4,10 +4,33 @@
   <style name="AppTheme" parent="AppTheme.Base"/>
 
   <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
+    <!-- Customize your theme here. -->
     <item name="colorPrimary">@color/colorPrimary</item>
     <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     <item name="colorAccent">@color/colorAccent</item>
+    <item name="android:textColor">@color/colorPrimaryText</item>
   </style>
 
   <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+  <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+  <style name="Text"/>
+  <style name="Text.Title">
+    <item name="android:textSize">@dimen/text_title</item>
+  </style>
+
+  <style name="RecyclerView" parent="Theme.AppCompat.Light.DarkActionBar">
+    <item name="colorPrimary">@color/colorPrimaryText</item>
+  </style>
+
+
+  <style name="NavigationDrawer"/>
+  <style name="NavigationDrawer.Title">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textColor">@color/colorPrimaryText</item>
+    <item name="android:textSize">@dimen/text_title</item>
+  </style>
+
 </resources>

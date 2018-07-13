@@ -1,4 +1,4 @@
-package com.ducdungdam.dartfriends.view;
+package com.ducdungdam.dartfriends.view.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 /**
- * Created by damdu on 13.07.2018.
+ * Created by ducdungdam on 13.07.18.
  */
 
 public class LauncherActivity extends AppCompatActivity {

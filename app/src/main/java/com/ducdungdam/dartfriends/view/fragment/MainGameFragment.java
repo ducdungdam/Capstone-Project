@@ -1,11 +1,13 @@
 package com.ducdungdam.dartfriends.view.fragment;
 
-import android.app.Fragment;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.PagerSnapHelper;
@@ -16,18 +18,21 @@ import android.view.ViewGroup;
 import com.ducdungdam.dartfriends.R;
 import com.ducdungdam.dartfriends.adapter.GameModeAdapter;
 import com.ducdungdam.dartfriends.adapter.PlayerSelectionAdapter;
+import com.ducdungdam.dartfriends.adapter.PlayerSelectionAdapter.OnPlayerSelectListener;
 import com.ducdungdam.dartfriends.databinding.FragmentMainGameBinding;
 import com.ducdungdam.dartfriends.model.GameMode;
 import com.ducdungdam.dartfriends.model.User;
-import com.ducdungdam.dartfriends.viewmodel.GameViewModel;
+import com.ducdungdam.dartfriends.view.activity.GameActivity;
+import com.ducdungdam.dartfriends.viewmodel.MainGameViewModel;
 import com.ducdungdam.dartfriends.widget.GameModeItemDecoration;
 import com.ducdungdam.dartfriends.widget.PlayerSelectionItemDecoration;
 import java.util.List;
 
 
-public class MainGameFragment extends Fragment {
+public class MainGameFragment extends Fragment implements OnPlayerSelectListener {
 
   private FragmentMainGameBinding rootView;
+  private Snackbar snackbar;
 
   @Nullable
   @Override
@@ -36,7 +41,7 @@ public class MainGameFragment extends Fragment {
     rootView = DataBindingUtil.inflate(inflater, R.layout.fragment_main_game, container, false);
 
     final AppCompatActivity activity = (AppCompatActivity) getActivity();
-    GameViewModel vm = ViewModelProviders.of(activity).get(GameViewModel.class);
+    MainGameViewModel vm = ViewModelProviders.of(activity).get(MainGameViewModel.class);
 
     vm.getGameModeList().observe(activity, new Observer<List<GameMode>>() {
       @Override
@@ -61,14 +66,54 @@ public class MainGameFragment extends Fragment {
           int columnCount = 3;
           rv.setLayoutManager(new GridLayoutManager(activity, columnCount));
           rv.addItemDecoration(new PlayerSelectionItemDecoration(activity));
-          rv.setAdapter(new PlayerSelectionAdapter(users));
+          PlayerSelectionAdapter adapter = new PlayerSelectionAdapter(users);
+          adapter.setOnPlayerSelectListener(MainGameFragment.this);
+          rv.setAdapter(adapter);
         } else {
           ((PlayerSelectionAdapter) rv.getAdapter()).setPlayerList(users);
-
         }
       }
     });
 
     return rootView.getRoot();
+  }
+
+  @Override
+  public void onPlayerSelect(User user) {
+
+    PlayerSelectionAdapter adapter = (PlayerSelectionAdapter) rootView.rvPlayerSelection
+        .getAdapter();
+    if (adapter != null && adapter.getSelectedPlayer().size() > 0) {
+      if (snackbar == null) {
+        snackbar = Snackbar
+            .make(rootView.constraintLayout,
+                String.format("Start game with %s player(s)", adapter.getSelectedPlayer().size()),
+                Snackbar.LENGTH_INDEFINITE)
+            .setAction("Start", new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), GameActivity.class);
+                startActivity(intent);
+              }
+            });
+        snackbar.show();
+      } else {
+        snackbar.setText(
+            String.format("Start game with %s player(s)", adapter.getSelectedPlayer().size()));
+      }
+    } else if (snackbar != null) {
+      snackbar.dismiss();
+      snackbar = null;
+    }
+  }
+
+  @Override
+  public void onResume() {
+    super.onResume();
+//    rootView.getRoot().scrollTo(0,0);
+//    PlayerSelectionAdapter adapter = (PlayerSelectionAdapter) rootView.rvPlayerSelection.getAdapter();
+//    if (adapter != null) {
+//      adapter.resetSelectedPlayer();
+//    }
   }
 }

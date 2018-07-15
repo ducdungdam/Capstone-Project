@@ -22,6 +22,7 @@ public class PlayerSelectionAdapter extends RecyclerView.Adapter<PlayerSelection
 
   private List<User> playerList;
   private List<Integer> selectedPlayer = new ArrayList<>();
+  private OnPlayerSelectListener onPlayerSelectListener;
 
   public PlayerSelectionAdapter(List<User> playerList) {
     this.playerList = playerList;
@@ -50,6 +51,24 @@ public class PlayerSelectionAdapter extends RecyclerView.Adapter<PlayerSelection
     notifyDataSetChanged();
   }
 
+  public List<Integer> getSelectedPlayer() {
+    return selectedPlayer;
+  }
+
+  public void resetSelectedPlayer(){
+    selectedPlayer = new ArrayList<>();
+    notifyDataSetChanged();
+  }
+
+  public void setOnPlayerSelectListener(
+      OnPlayerSelectListener onPlayerSelectListener) {
+    this.onPlayerSelectListener = onPlayerSelectListener;
+  }
+
+  public interface OnPlayerSelectListener {
+    void onPlayerSelect(User user);
+  }
+
   class PlayerSelectionViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     ViewPlayerSelectionItemBinding rootView;
@@ -74,6 +93,9 @@ public class PlayerSelectionAdapter extends RecyclerView.Adapter<PlayerSelection
       } else if (user.id == selectedPlayer.get(selectedPlayer.size() - 1)) {
         selectedPlayer.remove(selectedPlayer.size() - 1);
         rootView.ivUserOverlay.setVisibility(View.INVISIBLE);
+      }
+      if (onPlayerSelectListener != null) {
+        onPlayerSelectListener.onPlayerSelect(user);
       }
     }
   }

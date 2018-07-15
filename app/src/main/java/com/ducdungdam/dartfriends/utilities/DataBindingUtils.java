@@ -17,10 +17,19 @@ public class DataBindingUtils {
     Context context = imageView.getContext();
     Glide.with(context)
         .load(url)
+        .apply(new RequestOptions().placeholder(R.drawable.placeholder))
+        .transition(new DrawableTransitionOptions().crossFade())
+        .into(imageView);
+  }
+
+  @BindingAdapter("dataBindingUtilsSetImageCircle")
+  public static void setImageCircle(ImageView imageView, String url) {
+    Context context = imageView.getContext();
+    Glide.with(context)
+        .load(url)
         .apply(new RequestOptions()
             .placeholder(R.drawable.ic_launcher_foreground)
             .transform(new MultiTransformation<>(new FitCenter(), new CircleTransformation()))
-
         )
         .transition(new DrawableTransitionOptions().crossFade())
         .into(imageView);

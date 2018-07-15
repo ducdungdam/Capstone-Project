@@ -25,6 +25,7 @@ public class MainViewModel extends ViewModel {
         .add(new MainNavigationViewItem("Start Game", R.drawable.ic_launcher_foreground));
     navigationItems.add(new MainNavigationViewItem("Players", R.drawable.ic_launcher_foreground));
     navigationItems.add(new MainNavigationViewItem("History", R.drawable.ic_launcher_foreground));
+    navigationItems.add(new MainNavigationViewItem("Achievements", R.drawable.ic_launcher_foreground));
 
     navigationItems.add(new SubNavigationViewItem("Settings", R.drawable.ic_launcher_foreground));
 

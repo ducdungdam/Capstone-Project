@@ -24,6 +24,9 @@
       android:name=".view.activity.MainActivity">
     </activity>
     <activity
+      android:name=".view.activity.GameActivity">
+    </activity>
+    <activity
       android:name=".view.activity.CreatePlayerActivity">
     </activity>
   </application>

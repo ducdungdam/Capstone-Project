@@ -1,18 +1,19 @@
 package com.ducdungdam.dartfriends.view.activity;
 
-import android.app.Fragment;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import com.ducdungdam.dartfriends.R;
+import com.ducdungdam.dartfriends.databinding.ActivityMainBinding;
 import com.ducdungdam.dartfriends.model.User;
+import com.ducdungdam.dartfriends.view.fragment.MainAchievementsFragment;
 import com.ducdungdam.dartfriends.view.fragment.MainGameFragment;
 import com.ducdungdam.dartfriends.view.fragment.MainHelpCenterFragment;
 import com.ducdungdam.dartfriends.view.fragment.MainHistoryFragment;
@@ -24,7 +25,6 @@ import com.ducdungdam.dartfriends.viewmodel.MainViewModel;
 import com.ducdungdam.dartfriends.widget.NavigationView.NavigationView;
 import com.ducdungdam.dartfriends.widget.NavigationView.NavigationView.OnItemSelectedListener;
 import com.ducdungdam.dartfriends.widget.NavigationView.NavigationViewAdapter;
-import com.ducdungdam.dartfriends.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -102,25 +102,29 @@ public class MainActivity extends AppCompatActivity {
           rootView.appbar.collapsingToolbar.setTitle("Game History");
           break;
         case 3:
+          f = new MainAchievementsFragment();
+          rootView.appbar.collapsingToolbar.setTitle("Achievements");
+          break;
+        case 4:
           f = new MainSettingsFragment();
           rootView.appbar.collapsingToolbar.setTitle("Settings");
           break;
-        case 4:
+        case 5:
           f = new MainPrivacyAndSecurityFragment();
           rootView.appbar.collapsingToolbar.setTitle("Privacy and Security");
           break;
-        case 5:
+        case 6:
           f = new MainHelpCenterFragment();
           rootView.appbar.collapsingToolbar.setTitle("Help Center");
           break;
-        case 6:
+        case 7:
           f = new MainImprintFragment();
           rootView.appbar.collapsingToolbar.setTitle("Imprint");
           break;
         default:
           throw new IllegalArgumentException("Fragment for " + position + " not define yet!");
       }
-      getFragmentManager()
+      getSupportFragmentManager()
           .beginTransaction()
           .replace(R.id.fragment_container, f)
           .commit();

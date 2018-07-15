@@ -2,9 +2,11 @@ package com.ducdungdam.dartfriends.adapter;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import com.ducdungdam.dartfriends.R;
 import com.ducdungdam.dartfriends.adapter.GameModeAdapter.GameModeViewHolder;
@@ -17,6 +19,7 @@ import java.util.List;
  */
 
 public class GameModeAdapter extends RecyclerView.Adapter<GameModeViewHolder> {
+
   private List<GameMode> gameModeList;
 
   public GameModeAdapter(List<GameMode> gameModeList) {
@@ -55,8 +58,17 @@ public class GameModeAdapter extends RecyclerView.Adapter<GameModeViewHolder> {
       rootView = DataBindingUtil.bind(itemView);
     }
 
-    void bind(GameMode gameMode){
+    void bind(final GameMode gameMode) {
       rootView.setGameMode(gameMode);
+      rootView.tvMore.setOnClickListener(new OnClickListener() {
+        @Override
+        public void onClick(View view) {
+          new AlertDialog.Builder(rootView.getRoot().getContext())
+          .setTitle(gameMode.title)
+          .setMessage(gameMode.description)
+          .show();
+        }
+      });
     }
   }
 }

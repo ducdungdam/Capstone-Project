@@ -7,7 +7,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import com.ducdungdam.dartfriends.R;
 import com.ducdungdam.dartfriends.databinding.ViewNavigationBinding;
-import com.ducdungdam.dartfriends.model.User;
+import com.ducdungdam.dartfriends.model.Player;
 
 /**
  * Created by ducdungdam on 13.07.18.
@@ -34,8 +34,8 @@ public class NavigationView extends CoordinatorLayout {
         .inflate(LayoutInflater.from(context), R.layout.view_navigation, this, true);
   }
 
-  public void setUser(User user) {
-    root.setUser(user);
+  public void setPlayer(Player player) {
+    root.setPlayer(player);
   }
 
   public void setAdapter(NavigationViewAdapter navigationViewAdapter) {

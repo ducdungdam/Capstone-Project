@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+  xmlns:android="http://schemas.android.com/apk/res/android">
+  <data>
+    <variable
+      name="multiplier"
+      type="com.ducdungdam.dartfriends.model.ScoreMultiplier"/>
+  </data>
+
+  <TextView
+    android:id="@+id/btn_score_value"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    android:foreground="?attr/selectableItemBackgroundBorderless"
+    android:clickable="true"
+    android:focusable="true"
+    android:textAlignment="center"
+    android:textColor="@color/colorSecondaryText"
+    android:textSize="20sp"
+    android:text="@{multiplier.name}"/>
+</layout>

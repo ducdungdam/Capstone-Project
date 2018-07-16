@@ -4,8 +4,8 @@
   xmlns:app="http://schemas.android.com/apk/res-auto">
   <data>
     <variable
-      name="user"
-      type="com.ducdungdam.dartfriends.model.User"/>
+      name="player"
+      type="com.ducdungdam.dartfriends.model.Player"/>
   </data>
   <android.support.v7.widget.RecyclerView
     android:id="@+id/rv_navigation_content"

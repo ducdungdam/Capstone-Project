@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import com.ducdungdam.dartfriends.R;
 import com.ducdungdam.dartfriends.adapter.NextPlayerAdapter.NextPlayerViewHolder;
 import com.ducdungdam.dartfriends.databinding.ViewNextPlayerItemBinding;
-import com.ducdungdam.dartfriends.model.User;
+import com.ducdungdam.dartfriends.model.Player;
 import java.util.List;
 
 /**
@@ -18,9 +18,9 @@ import java.util.List;
 
 public class NextPlayerAdapter extends RecyclerView.Adapter<NextPlayerViewHolder> {
 
-  private List<User> playerList;
+  private List<Player> playerList;
 
-  public NextPlayerAdapter(List<User> playerList) {
+  public NextPlayerAdapter(List<Player> playerList) {
     this.playerList = playerList;
   }
 
@@ -51,8 +51,8 @@ public class NextPlayerAdapter extends RecyclerView.Adapter<NextPlayerViewHolder
       rootView = DataBindingUtil.bind(itemView);
     }
 
-    void bind(User user){
-      rootView.setUser(user);
+    void bind(Player player){
+      rootView.setPlayer(player);
     }
   }
 }

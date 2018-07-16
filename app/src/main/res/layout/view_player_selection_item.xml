@@ -4,8 +4,8 @@
   xmlns:app="http://schemas.android.com/apk/res-auto">
   <data>
     <variable
-      name="user"
-      type="com.ducdungdam.dartfriends.model.User"/>
+      name="player"
+      type="com.ducdungdam.dartfriends.model.Player"/>
   </data>
   <android.support.constraint.ConstraintLayout
     android:layout_width="72dp"
@@ -18,7 +18,7 @@
       app:layout_constraintDimensionRatio="w,1:1"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:dataBindingUtilsSetImageCircle="@{user.imageSrc}"/>
+      app:dataBindingUtilsSetImageCircle="@{player.imageSrc}"/>
     <TextView
       android:id="@+id/tv_username"
       android:layout_width="match_parent"
@@ -27,7 +27,7 @@
       android:layout_marginStart="8dp"
       android:layout_marginEnd="8dp"
       android:singleLine="true"
-      android:text="@{user.userName}"
+      android:text="@{player.name}"
       android:textAlignment="center"
       android:textSize="12sp"
       app:layout_constraintEnd_toEndOf="parent"

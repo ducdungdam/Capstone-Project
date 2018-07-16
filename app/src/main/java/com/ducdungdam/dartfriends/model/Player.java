@@ -2,26 +2,26 @@ package com.ducdungdam.dartfriends.model;
 
 /**
  * Created by ducdungdam on 13.07.18.
- * Model Definition of User in App.
+ * Model Definition of Player in App.
  */
 
-public class User {
+public class Player {
 
   public final int id;
-  public final String userName;
+  public final String name;
   public final String imageSrc;
 
-  public User(int id, String userName, String imageSrc) {
+  public Player(int id, String name, String imageSrc) {
     this.id = id;
-    this.userName = userName;
+    this.name = name;
     this.imageSrc = imageSrc;
   }
 
   @Override
   public String toString() {
     return String.format(
-        "User: {userName='%s', imageSrc='%s'}",
-        userName,
+        "Player: {name='%s', imageSrc='%s'}",
+        name,
         imageSrc
     );
   }

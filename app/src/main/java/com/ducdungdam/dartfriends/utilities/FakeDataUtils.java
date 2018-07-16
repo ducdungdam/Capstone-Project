@@ -1,31 +1,31 @@
 package com.ducdungdam.dartfriends.utilities;
 
 import com.ducdungdam.dartfriends.model.GameMode;
-import com.ducdungdam.dartfriends.model.User;
+import com.ducdungdam.dartfriends.model.Player;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FakeDataUtils {
 
-  public static User getUser() {
-    return new User(0, "Duc Dung", "https://pbs.twimg.com/profile_images/529025886792593408/kThWCIad.jpeg");
+  public static Player getPlayer() {
+    return new Player(0, "Duc Dung", "https://pbs.twimg.com/profile_images/529025886792593408/kThWCIad.jpeg");
   }
 
-  public static List<User> getUserList() {
-    List<User> userList = new ArrayList<>();
-    userList.add(getUser());
-    userList.add(new User(1, "Robin", "https://avatarfiles.alphacoders.com/100/100990.jpg"));
-    userList.add(new User(2, "Roth", "https://avatarfiles.alphacoders.com/782/78200.png"));
-    userList.add(new User(3, "John", "https://avatarfiles.alphacoders.com/623/thumb-62373.jpg"));
-    userList.add(new User(4, "Greg",
+  public static List<Player> getPlayerList() {
+    List<Player> playerList = new ArrayList<>();
+    playerList.add(getPlayer());
+    playerList.add(new Player(1, "Robin", "https://vignette.wikia.nocookie.net/overwatch/images/e/e5/Genji_-_Twitter_Avatar.png"));
+    playerList.add(new Player(2, "Roth", "https://avatarfiles.alphacoders.com/782/78200.png"));
+    playerList.add(new Player(3, "John", "https://avatarfiles.alphacoders.com/623/thumb-62373.jpg"));
+    playerList.add(new Player(4, "Greg",
         "https://orig00.deviantart.net/2fe5/f/2015/065/a/4/avatar_ultimate_son_gohan_form__dragon_ball__by_raidenakuma-d8kn16h.png"));
-    userList.add(new User(5, "Mutti", "https://avatarfiles.alphacoders.com/584/58469.png"));
-    userList.add(new User(6, "Pappi",
+    playerList.add(new Player(5, "Mutti", "https://avatarfiles.alphacoders.com/584/58469.png"));
+    playerList.add(new Player(6, "Pappi",
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeSzVgbe7d-8FYJcioN9QCnuGLBVESEoPII5o784ZoG0n486GK"));
-    userList.add(new User(7, "Omi", "https://avatarfiles.alphacoders.com/688/thumb-68801.jpg"));
-    userList.add(new User(8, "Opi", "https://avatarfiles.alphacoders.com/107/107813.jpg"));
+    playerList.add(new Player(7, "Omi", "https://avatarfiles.alphacoders.com/688/thumb-68801.jpg"));
+    playerList.add(new Player(8, "Opi", "https://avatarfiles.alphacoders.com/107/107813.jpg"));
 
-    return userList;
+    return playerList;
   }
 
   public static List<GameMode> getGameModeList() {

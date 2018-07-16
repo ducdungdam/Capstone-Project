@@ -4,7 +4,7 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import com.ducdungdam.dartfriends.R;
-import com.ducdungdam.dartfriends.model.User;
+import com.ducdungdam.dartfriends.model.Player;
 import com.ducdungdam.dartfriends.utilities.FakeDataUtils;
 import com.ducdungdam.dartfriends.widget.NavigationView.NavigationViewItem;
 import com.ducdungdam.dartfriends.widget.NavigationView.NavigationViewItem.MainNavigationViewItem;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class MainViewModel extends ViewModel {
 
-  private MutableLiveData<User> user;
+  private MutableLiveData<Player> player;
 
   public ArrayList<NavigationViewItem> getNavigationViewItemList() {
     ArrayList<NavigationViewItem> navigationItems = new ArrayList<>();
@@ -36,11 +36,11 @@ public class MainViewModel extends ViewModel {
     return navigationItems;
   }
 
-  public LiveData<User> getUser() {
-    if (user == null) {
-      user = new MutableLiveData<>();
-      user.setValue(FakeDataUtils.getUser());
+  public LiveData<Player> getPlayer() {
+    if (player == null) {
+      player = new MutableLiveData<>();
+      player.setValue(FakeDataUtils.getPlayer());
     }
-    return user;
+    return player;
   }
 }

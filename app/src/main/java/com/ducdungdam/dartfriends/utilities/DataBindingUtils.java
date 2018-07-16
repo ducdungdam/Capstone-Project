@@ -9,6 +9,7 @@ import com.bumptech.glide.load.resource.bitmap.FitCenter;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
 import com.ducdungdam.dartfriends.R;
+import com.ducdungdam.dartfriends.model.RoundScore;
 import com.ducdungdam.dartfriends.utilities.GlideUtils.CircleTransformation;
 
 public class DataBindingUtils {
@@ -33,5 +34,13 @@ public class DataBindingUtils {
         )
         .transition(new DrawableTransitionOptions().crossFade())
         .into(imageView);
+  }
+
+  public static String getScoreString(int index, RoundScore roundScore) {
+    try{
+      return roundScore.getScores().get(index).getString();
+    } catch (Exception e) {
+      return "-";
+    }
   }
 }

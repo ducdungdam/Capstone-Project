@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import com.ducdungdam.dartfriends.R;
 import com.ducdungdam.dartfriends.adapter.PlayerSelectionAdapter.PlayerSelectionViewHolder;
 import com.ducdungdam.dartfriends.databinding.ViewPlayerSelectionItemBinding;
-import com.ducdungdam.dartfriends.model.User;
+import com.ducdungdam.dartfriends.model.Player;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,11 +20,11 @@ import java.util.List;
 
 public class PlayerSelectionAdapter extends RecyclerView.Adapter<PlayerSelectionViewHolder> {
 
-  private List<User> playerList;
+  private List<Player> playerList;
   private List<Integer> selectedPlayer = new ArrayList<>();
   private OnPlayerSelectListener onPlayerSelectListener;
 
-  public PlayerSelectionAdapter(List<User> playerList) {
+  public PlayerSelectionAdapter(List<Player> playerList) {
     this.playerList = playerList;
   }
 
@@ -46,7 +46,7 @@ public class PlayerSelectionAdapter extends RecyclerView.Adapter<PlayerSelection
     return playerList.size();
   }
 
-  public void setPlayerList(List<User> playerList) {
+  public void setPlayerList(List<Player> playerList) {
     this.playerList = playerList;
     notifyDataSetChanged();
   }
@@ -66,7 +66,7 @@ public class PlayerSelectionAdapter extends RecyclerView.Adapter<PlayerSelection
   }
 
   public interface OnPlayerSelectListener {
-    void onPlayerSelect(User user);
+    void onPlayerSelect(Player player);
   }
 
   class PlayerSelectionViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -79,23 +79,23 @@ public class PlayerSelectionAdapter extends RecyclerView.Adapter<PlayerSelection
       itemView.setOnClickListener(this);
     }
 
-    public void bind(User user) {
-      rootView.setUser(user);
+    public void bind(Player player) {
+      rootView.setPlayer(player);
     }
 
     @Override
     public void onClick(View view) {
-      User user = rootView.getUser();
+      Player player = rootView.getPlayer();
       if (rootView.ivUserOverlay.getVisibility() != View.VISIBLE) {
-        selectedPlayer.add(user.id);
+        selectedPlayer.add(player.id);
         rootView.tvUserOverlayCounter.setText(String.valueOf(selectedPlayer.size()));
         rootView.ivUserOverlay.setVisibility(View.VISIBLE);
-      } else if (user.id == selectedPlayer.get(selectedPlayer.size() - 1)) {
+      } else if (player.id == selectedPlayer.get(selectedPlayer.size() - 1)) {
         selectedPlayer.remove(selectedPlayer.size() - 1);
         rootView.ivUserOverlay.setVisibility(View.INVISIBLE);
       }
       if (onPlayerSelectListener != null) {
-        onPlayerSelectListener.onPlayerSelect(user);
+        onPlayerSelectListener.onPlayerSelect(player);
       }
     }
   }

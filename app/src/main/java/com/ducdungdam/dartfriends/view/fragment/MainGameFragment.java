@@ -21,7 +21,7 @@ import com.ducdungdam.dartfriends.adapter.PlayerSelectionAdapter;
 import com.ducdungdam.dartfriends.adapter.PlayerSelectionAdapter.OnPlayerSelectListener;
 import com.ducdungdam.dartfriends.databinding.FragmentMainGameBinding;
 import com.ducdungdam.dartfriends.model.GameMode;
-import com.ducdungdam.dartfriends.model.User;
+import com.ducdungdam.dartfriends.model.Player;
 import com.ducdungdam.dartfriends.view.activity.GameActivity;
 import com.ducdungdam.dartfriends.viewmodel.MainGameViewModel;
 import com.ducdungdam.dartfriends.widget.GameModeItemDecoration;
@@ -58,19 +58,19 @@ public class MainGameFragment extends Fragment implements OnPlayerSelectListener
       }
     });
 
-    vm.getUserList().observe(activity, new Observer<List<User>>() {
+    vm.getPlayerList().observe(activity, new Observer<List<Player>>() {
       @Override
-      public void onChanged(@Nullable List<User> users) {
+      public void onChanged(@Nullable List<Player> players) {
         RecyclerView rv = rootView.rvPlayerSelection;
         if (rv.getAdapter() == null) {
           int columnCount = 3;
           rv.setLayoutManager(new GridLayoutManager(activity, columnCount));
           rv.addItemDecoration(new PlayerSelectionItemDecoration(activity));
-          PlayerSelectionAdapter adapter = new PlayerSelectionAdapter(users);
+          PlayerSelectionAdapter adapter = new PlayerSelectionAdapter(players);
           adapter.setOnPlayerSelectListener(MainGameFragment.this);
           rv.setAdapter(adapter);
         } else {
-          ((PlayerSelectionAdapter) rv.getAdapter()).setPlayerList(users);
+          ((PlayerSelectionAdapter) rv.getAdapter()).setPlayerList(players);
         }
       }
     });
@@ -79,7 +79,7 @@ public class MainGameFragment extends Fragment implements OnPlayerSelectListener
   }
 
   @Override
-  public void onPlayerSelect(User user) {
+  public void onPlayerSelect(Player player) {
 
     PlayerSelectionAdapter adapter = (PlayerSelectionAdapter) rootView.rvPlayerSelection
         .getAdapter();

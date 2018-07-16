@@ -5,8 +5,8 @@
   xmlns:tools="http://schemas.android.com/tools">
   <data>
     <variable
-      name="user"
-      type="com.ducdungdam.dartfriends.model.User"/>
+      name="player"
+      type="com.ducdungdam.dartfriends.model.Player"/>
   </data>
   <android.support.v4.widget.DrawerLayout
     android:id="@+id/navigation_drawer"
@@ -36,6 +36,6 @@
       android:layout_gravity="start"
       android:background="@color/colorPrimaryDark"
       android:fitsSystemWindows="true"
-      app:user="@{user}"/>
+      app:player="@{player}"/>
   </android.support.v4.widget.DrawerLayout>
 </layout>

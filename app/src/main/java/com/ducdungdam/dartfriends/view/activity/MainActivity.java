@@ -12,7 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import com.ducdungdam.dartfriends.R;
 import com.ducdungdam.dartfriends.databinding.ActivityMainBinding;
-import com.ducdungdam.dartfriends.model.User;
+import com.ducdungdam.dartfriends.model.Player;
 import com.ducdungdam.dartfriends.view.fragment.MainAchievementsFragment;
 import com.ducdungdam.dartfriends.view.fragment.MainGameFragment;
 import com.ducdungdam.dartfriends.view.fragment.MainHelpCenterFragment;
@@ -47,10 +47,10 @@ public class MainActivity extends AppCompatActivity {
         .setAdapter(new NavigationViewAdapter(vm.getNavigationViewItemList()));
     rootView.navigationView.setOnItemSelectedListener(onNavigationItemSelectedListener);
 
-    vm.getUser().observe(this, new Observer<User>() {
+    vm.getPlayer().observe(this, new Observer<Player>() {
       @Override
-      public void onChanged(@Nullable User user) {
-        rootView.setUser(user);
+      public void onChanged(@Nullable Player player) {
+        rootView.setPlayer(player);
       }
     });
 

@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import com.ducdungdam.dartfriends.R;
 import com.ducdungdam.dartfriends.adapter.PlayerAdapter;
 import com.ducdungdam.dartfriends.databinding.FragmentMainPlayerBinding;
-import com.ducdungdam.dartfriends.model.User;
+import com.ducdungdam.dartfriends.model.Player;
 import com.ducdungdam.dartfriends.viewmodel.MainPlayerViewModel;
 import java.util.List;
 
@@ -30,15 +30,15 @@ public class MainPlayerFragment extends Fragment {
 
     final AppCompatActivity activity = (AppCompatActivity) getActivity();
     MainPlayerViewModel vm = ViewModelProviders.of(activity).get(MainPlayerViewModel.class);
-    vm.getUserList().observe(activity, new Observer<List<User>>() {
+    vm.getPlayerList().observe(activity, new Observer<List<Player>>() {
       @Override
-      public void onChanged(@Nullable List<User> users) {
+      public void onChanged(@Nullable List<Player> players) {
         RecyclerView rv = rootView.rvPlayerStatistics;
         if (rv.getAdapter() == null) {
-          PlayerAdapter adapter = new PlayerAdapter(users);
+          PlayerAdapter adapter = new PlayerAdapter(players);
           rv.setAdapter(adapter);
         } else {
-          ((PlayerAdapter) rv.getAdapter()).setPlayerList(users);
+          ((PlayerAdapter) rv.getAdapter()).setPlayerList(players);
         }
       }
     });

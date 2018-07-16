@@ -2,30 +2,45 @@ package com.ducdungdam.dartfriends.model;
 
 /**
  * Created by ducdungdam on 13.07.18.
- * Model Definition of User in App.
+ * Model Definition of Player in App.
  */
 
 public class Score {
-  public static final int TYPE_SCORE = 0;
-  public static final int TYPE_MULTIPLIER = 1;
-
   public final String name;
   public final int value;
-  public final int type;
+  private ScoreMultiplier scoreMultiplier = null;
 
-  public Score(String name, int value, int type) {
+  public Score(String name, int value) {
     this.name = name;
     this.value = value;
-    this.type = type;
+  }
+
+  public String getString() {
+    try {
+      return scoreMultiplier.shortName + String.valueOf(value);
+    } catch (Exception e) {
+      return String.valueOf(value);
+    }
+  }
+
+  public int getTotal() {
+    try {
+      return scoreMultiplier.factor * value;
+    } catch (Exception e) {
+      return value;
+    }
+  }
+
+  public void setScoreMultiplier(ScoreMultiplier scoreMultiplier) {
+    this.scoreMultiplier = scoreMultiplier;
   }
 
   @Override
   public String toString() {
     return String.format(
-        "Score: {name='%s', value='%s', type='%s'}",
+        "Score: {name='%s', value='%s'}",
         name,
-        value,
-        type
+        value
     );
   }
 }

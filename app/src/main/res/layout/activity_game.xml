@@ -2,6 +2,21 @@
 <layout
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto">
+  <data>
+    <import type="com.ducdungdam.dartfriends.utilities.DataBindingUtils"/>
+    <variable
+      name="player"
+      type="com.ducdungdam.dartfriends.model.Player"/>
+    <variable
+      name="currentThrowIndex"
+      type="java.lang.Integer"/>
+    <variable
+      name="points"
+      type="java.lang.Integer"/>
+    <variable
+      name="currentRoundScore"
+      type="com.ducdungdam.dartfriends.model.RoundScore"/>
+  </data>
   <android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -22,6 +37,7 @@
       android:layout_marginTop="8dp"
       android:layout_marginStart="8dp"
       android:src="@drawable/circle_image"
+      app:dataBindingUtilsSetImageCircle="@{player.imageSrc}"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/toolbar"/>
     <TextView
@@ -30,7 +46,7 @@
       android:layout_height="wrap_content"
       android:layout_marginBottom="8dp"
       android:layout_marginStart="8dp"
-      android:text="342"
+      android:text='@{points == null ? "N/A" : String.valueOf(points)}'
       android:textSize="32sp"
       app:layout_constraintBottom_toTopOf="@+id/first_score"
       app:layout_constraintEnd_toStartOf="@+id/textView4"
@@ -47,7 +63,7 @@
       android:layout_marginTop="4dp"
       android:layout_marginStart="8dp"
       android:layout_marginEnd="8dp"
-      android:text="Up next (6)"
+      android:text="Up next"
       android:textAlignment="center"
       android:textSize="14sp"
       app:layout_constraintEnd_toEndOf="parent"
@@ -79,7 +95,7 @@
       android:layout_height="wrap_content"
       android:padding="@dimen/spacing_small"
       android:background="?colorPrimaryDark"
-      android:text="Dung"
+      android:text="@{player.name}"
       android:textAlignment="center"
       android:textColor="#fff"
       android:textSize="16sp"
@@ -88,37 +104,15 @@
       app:layout_constraintStart_toStartOf="@+id/iv_current_user"
       app:layout_constraintTop_toBottomOf="@+id/iv_current_user"/>
     <android.support.constraint.ConstraintLayout
-      android:id="@+id/second_score"
-      android:layout_width="40dp"
-      android:layout_height="40dp"
-      android:layout_marginStart="8dp"
-      android:alpha="0.8"
-      android:background="@drawable/circle_image"
-      app:layout_constraintStart_toEndOf="@+id/first_score"
-      app:layout_constraintTop_toTopOf="@+id/first_score">
-      <TextView
-        android:id="@+id/tv_second_score"
-        android:textStyle="bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="T20"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-    </android.support.constraint.ConstraintLayout>
-    <android.support.constraint.ConstraintLayout
       android:id="@+id/first_score"
       android:layout_width="40dp"
       android:layout_height="40dp"
       android:layout_marginStart="8dp"
       android:alpha="0.8"
-      android:background="@drawable/circle_image"
+      android:background="@{currentThrowIndex == 0 ? @drawable/score_image_pressed : @drawable/score_image}"
+      android:clickable="true"
+      android:focusable="true"
+      android:foreground="?attr/selectableItemBackgroundBorderless"
       app:layout_constraintBottom_toBottomOf="@+id/textView5"
       app:layout_constraintStart_toEndOf="@+id/iv_current_user">
       <TextView
@@ -130,7 +124,35 @@
         android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:text="D14"
+        android:text='@{DataBindingUtils.getScoreString(0, currentRoundScore)}'
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+    </android.support.constraint.ConstraintLayout>
+    <android.support.constraint.ConstraintLayout
+      android:id="@+id/second_score"
+      android:layout_width="40dp"
+      android:layout_height="40dp"
+      android:layout_marginStart="8dp"
+      android:alpha="0.8"
+      android:background="@{currentThrowIndex == 1 ? @drawable/score_image_pressed : @drawable/score_image}"
+      android:clickable="true"
+      android:focusable="true"
+      android:foreground="?attr/selectableItemBackgroundBorderless"
+      app:layout_constraintStart_toEndOf="@+id/first_score"
+      app:layout_constraintTop_toTopOf="@+id/first_score">
+      <TextView
+        android:id="@+id/tv_second_score"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@{DataBindingUtils.getScoreString(1, currentRoundScore)}"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -143,7 +165,10 @@
       android:layout_height="40dp"
       android:layout_marginStart="8dp"
       android:alpha="0.8"
-      android:background="@drawable/circle_image"
+      android:background="@{currentThrowIndex == 2 ? @drawable/score_image_pressed : @drawable/score_image}"
+      android:clickable="true"
+      android:focusable="true"
+      android:foreground="?attr/selectableItemBackgroundBorderless"
       app:layout_constraintStart_toEndOf="@+id/second_score"
       app:layout_constraintTop_toTopOf="@+id/second_score">
       <TextView
@@ -155,7 +180,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:text="13"
+        android:text="@{DataBindingUtils.getScoreString(2, currentRoundScore)}"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -211,6 +236,16 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/divider_horizontal"
       app:layout_constraintVertical_bias="1.0"/>
+    <android.support.design.widget.FloatingActionButton
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="8dp"
+      android:layout_marginEnd="8dp"
+      android:visibility="invisible"
+      android:src="@drawable/ic_menu"
+      app:backgroundTint="@android:color/background_light"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"/>
 
   </android.support.constraint.ConstraintLayout>
 </layout>

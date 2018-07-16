@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import com.ducdungdam.dartfriends.R;
 import com.ducdungdam.dartfriends.adapter.PlayerAdapter.PlayerViewHolder;
 import com.ducdungdam.dartfriends.databinding.ViewPlayerItemBinding;
-import com.ducdungdam.dartfriends.model.User;
+import com.ducdungdam.dartfriends.model.Player;
 import java.util.List;
 
 /**
@@ -19,10 +19,10 @@ import java.util.List;
 
 public class PlayerAdapter extends RecyclerView.Adapter<PlayerViewHolder> {
 
-  private List<User> playerList;
+  private List<Player> playerList;
   private OnPlayerSelectListener onPlayerSelectListener;
 
-  public PlayerAdapter(List<User> playerList) {
+  public PlayerAdapter(List<Player> playerList) {
     this.playerList = playerList;
   }
 
@@ -44,7 +44,7 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerViewHolder> {
     return playerList.size();
   }
 
-  public void setPlayerList(List<User> playerList) {
+  public void setPlayerList(List<Player> playerList) {
     this.playerList = playerList;
     notifyDataSetChanged();
   }
@@ -55,7 +55,7 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerViewHolder> {
   }
 
   public interface OnPlayerSelectListener {
-    void onPlayerSelect(User user);
+    void onPlayerSelect(Player player);
   }
 
   class PlayerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -68,8 +68,8 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerViewHolder> {
       itemView.setOnClickListener(this);
     }
 
-    public void bind(User user) {
-      rootView.setUser(user);
+    public void bind(Player player) {
+      rootView.setPlayer(player);
     }
 
     @Override
